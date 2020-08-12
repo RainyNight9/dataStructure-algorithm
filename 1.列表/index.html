@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>列表</title>
+	</head>
+	<body>
+		<script src="./List.js"></script>
+		<script>
+			// test
+
+			let wxbWife = new List()
+
+			wxbWife.append('阿珂')
+			wxbWife.append('双儿')
+			wxbWife.append('建宁')
+
+			wxbWife.next()
+			wxbWife.insert('龙儿', '建宁')
+			console.log('dataStore', wxbWife.dataStore)
+
+			console.log('getElement', wxbWife.getElement())
+			console.log('length', wxbWife.length())
+			console.log('toString', wxbWife.toString())
+			console.log('contains龙儿', wxbWife.contains('龙儿'))
+			console.log('contains宝儿', wxbWife.contains('宝儿'))
+
+			wxbWife.remove('龙儿')
+			console.log('contains龙儿', wxbWife.contains('龙儿'))
+
+			// 迭代器
+			// 可以了解一下迭代器
+			for (
+				wxbWife.front();
+				wxbWife.currPos() < wxbWife.length();
+				wxbWife.next()
+			) {
+				console.log(wxbWife.getElement())
+			}
+
+			wxbWife.front()
+			console.log('currPos', wxbWife.currPos())
+			wxbWife.end()
+			console.log('currPos', wxbWife.currPos())
+			wxbWife.moveTo(1)
+			console.log('currPos', wxbWife.currPos())
+
+			wxbWife.clear()
+			console.log('dataStore', wxbWife.dataStore)
+		</script>
+	</body>
+</html>

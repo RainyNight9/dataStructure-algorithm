@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>队列</title>
+	</head>
+	<body>
+		<script src="./queue.js"></script>
+
+		<script>
+			// test
+
+			// let q = new Queue()
+			// q.enqueue('第一个人')
+			// q.enqueue('第二个人')
+			// q.enqueue('第三个人')
+			// q.enqueue('第四个人')
+
+			// console.log(q.toString())
+			// console.log(q.front())
+			// console.log(q.back())
+			// console.log(q.empty())
+
+			// q.dequeue()
+			// console.log(q.toString())
+			// console.log(q.front())
+			// console.log(q.back())
+			// console.log(q.empty())
+
+			// q.dequeue()
+			// q.dequeue()
+			// q.dequeue()
+			// console.log(q.toString())
+			// console.log(q.front())
+			// console.log(q.back())
+			// console.log(q.empty())
+		</script>
+
+		<script>
+			// 特殊情况；急诊，病人
+
+			function Patient(name, code) {
+				this.name = name // 病人
+				this.code = code // 严重程度
+			}
+			// 重写出队列
+			function dequeue() {
+				let priority = 0 // 优先
+				for (let i = 1; i < this.dataStore.length; ++i) {
+					if (this.dataStore[i].code > this.dataStore[priority].code) {
+						priority = i
+					}
+				}
+				return this.dataStore.splice(priority, 1)
+			}
+			// 重写toString
+			function toString() {
+				let str = ''
+				for (let i = 0; i < this.dataStore.length; ++i) {
+					str +=
+						this.dataStore[i].name + 'code:' + this.dataStore[i].code + '\n'
+				}
+				return str
+			}
+			// 创建病人
+			let p = new Patient('病0', 1)
+			let p1 = new Patient('病1', 5)
+			let p2 = new Patient('病2', 4)
+			let p3 = new Patient('病3', 7)
+			let p4 = new Patient('病4', 9)
+			let p5 = new Patient('病5', 2)
+			let p6 = new Patient('病6', 8)
+			// 开始看病, 排队, 急诊！
+			let kp = new Queue()
+			kp.enqueue(p)
+			kp.enqueue(p1)
+			kp.enqueue(p2)
+			kp.enqueue(p3)
+			kp.enqueue(p4)
+			kp.enqueue(p5)
+			kp.enqueue(p6)
+			// 看看是谁最严重，优先诊治
+			console.log('第1个诊治的：', kp.dequeue())
+			console.log('toString', kp.toString())
+
+			console.log('第2个诊治的：', kp.dequeue())
+			console.log('toString', kp.toString())
+		</script>
+	</body>
+</html>

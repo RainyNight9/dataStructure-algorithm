@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>链表</title>
+	</head>
+	<body>
+		<script src="./linkedList.js"></script>
+
+		<script>
+			// test 单向链表
+
+			// let l = new LinkedList()
+			// l.insert('first', 'head')
+			// l.insert('second', 'first')
+			// l.insert('thrid', 'second')
+			// l.insert('fourth', 'thrid')
+			// l.insert('fifth', 'fourth')
+			// l.display()
+			// console.log('===========')
+			// l.remove('fourth')
+			// l.display()
+		</script>
+
+		<script>
+			// test 双向链表
+
+			let dl = new DLList()
+			dl.insert('first', 'head')
+			dl.insert('second', 'first')
+			dl.insert('thrid', 'second')
+			dl.insert('fourth', 'thrid')
+			dl.insert('fifth', 'fourth')
+			dl.display()
+			console.log('===========')
+			dl.remove('fourth')
+			dl.display()
+			console.log('===========')
+			dl.disReverse()
+		</script>
+	</body>
+</html>

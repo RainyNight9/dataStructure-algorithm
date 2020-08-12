@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>栈</title>
+	</head>
+	<body>
+		<script src="./stack.js"></script>
+		<script>
+			// test 类似放盘子
+
+			// let plate = new Stack()
+
+			// plate.push('最大盘子')
+			// plate.push('第二大盘子')
+			// plate.push('第三大盘子')
+			// plate.push('第四大盘子')
+
+			// console.log('length', plate.length())
+			// console.log('dataStore', plate.dataStore)
+			// console.log('peek', plate.peek())
+
+			// plate.pop()
+			// console.log('length', plate.length())
+			// console.log('dataStore', plate.dataStore)
+			// console.log('peek', plate.peek())
+
+			// plate.clear()
+			// console.log('length', plate.length())
+			// console.log('dataStore', plate.dataStore)
+			// console.log('peek', plate.peek())
+		</script>
+
+		<script>
+			// 回文算法  dad 1001 racecar
+
+			function isPalindrome(word) {
+				let s = new Stack()
+				for (let i = 0; i < word.length; i++) {
+					s.push(word[i])
+				}
+				let rword = ''
+				console.log(s)
+				while (s.length() > 0) {
+					rword += s.pop()
+				}
+				if (rword === word) return true
+				return false
+			}
+
+			let myWord = '1100011'
+			alert(isPalindrome(myWord))
+		</script>
+	</body>
+</html>
