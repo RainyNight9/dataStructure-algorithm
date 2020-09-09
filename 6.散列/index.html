@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>散列</title>
+	</head>
+	<body>
+		<script src="./hash.js"></script>
+
+		<script>
+			// test
+
+			let h = new Hash()
+			// 质数
+			// h.put('A')
+			// h.put('BCD')
+			// h.put('CBD')
+			// h.put('DE')
+			// h.put('ED')
+			// h.put('F')
+			// h.showDistro()
+
+			// 开链法
+			// h.build()
+			// h.put2('A')
+			// h.put2('BCD')
+			// h.put2('CBD')
+			// h.put2('DE')
+			// h.put2('ED')
+			// h.put2('F')
+			// h.showDistro2()
+
+			// 线性探测法
+			h.put3('A')
+			h.put3('BCD')
+			h.put3('CBD')
+			h.put3('DE')
+			h.put3('ED')
+			h.put3('F')
+			console.log(`CBD位置：`, h.get3('CBD'))
+			h.showDistro()
+		</script>
+	</body>
+</html>

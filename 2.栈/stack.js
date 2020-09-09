@@ -1,19 +1,22 @@
 // 栈的介绍
-// 1.栈是一种特殊的列表
+// 1.栈是一种特殊的列表 栈顶 栈底
 // 2.栈是一种高效的数据结构，因为数据只能在栈顶删除或增加，操作很快
 // 3.栈内元素只能通过列表的一端访问，这一端称为栈顶（反之栈底）
 // 4.栈被称为一种后入先出的数据结构（LIFO，last-in-first-out）
 // 5.插入新元素称作进栈、入栈、压栈，从一个栈删除元素称作出栈或者退栈
+// 6.例子：类似一摞书或者 一摞盘子
 
 // 创建一个 栈 的构造函数
 function Stack() {
   this.dataStore = [] // 保存栈内元素
   this.top = 0 // 标记可以插入新元素的位置，栈内压入元素，该变量变大，弹出元素，变量变小
-  this.push = push //入栈操作
+  this.push = push // 入栈操作
   this.pop = pop // 出栈操作
   this.peek = peek // 返回栈顶元素
   this.clear = clear // 清空栈
   this.length = length // 栈的长度
+  this.isEmpty = isEmpty
+  this.print = print
 }
 
 // 向栈中压入元素 同时让指针top+1 一定注意++
@@ -43,4 +46,76 @@ function clear() {
   this.top = 0
   this.dataStore = []
 }
+
+function isEmpty() {
+  return this.top === 0
+}
+
+function print() {
+  console.log(this.dataStore.toString())
+}
+
+
+
+// 换成 ES6 
+
+// class Stack{
+//   constructor(){
+//     this.dataStore = [] // 公用的...
+//     ...
+//   }
+//   push(element){
+//     ...
+//   }
+//   ... 
+// }
+
+
+
+// 用ES6 的限定作用域Symbol 实现类
+// let _dataStore = Symbol() // 声明Symbol 类型的变量
+
+// class Stack {
+//   constructor() {
+//     this[_dataStore] = [] // 创建了一个假的私有属性
+//     ...
+//   }
+//   ...
+// }
+
+
+
+// 用ES6 的WeakMap 实现类, 可以确保属性 是私有的
+// `WeakMap`结构与`Map`结构类似，也是用于生成键值对的集合，其中键是对象，值可以是任意数据类型
+// const dataStore = new WeakMap() // 是在 类 以外声明的，谁都可以改动，加个闭包
+
+// class Stack {
+//   constructor() {
+//     dataStore.set(this, []) // 以this（Stack类自己的引用）为键，把代表栈的数组存入
+//     ...
+//   }
+//   push () {
+//     let d = dataStore.get(this) // 以this 为键，从 dataStore 中取值
+//     ...
+//   }
+// }
+
+
+// 加个闭包
+// let Stack = (function () {
+//   class Stack {
+//     constructor() {
+//       dataStore.set(this, []) // 以this（Stack类自己的引用）为键，把代表栈的数组存入
+//       ...
+//     }
+//     push () {
+//       let d = dataStore.get(this) // 以this 为键，从 dataStore 中取值
+//       ...
+//     }
+//   }
+//   return Stack
+// })()
+
+
+// 学习使用栈的最著名的三个算法示例：10进制转2进制，任意进制转换，平衡圆括号
 

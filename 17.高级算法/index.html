@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>高级算法</title>
+	</head>
+	<body>
+		<script src="./advance.js"></script>
+
+		<script>
+			// test
+
+			console.log('递归实现', recurFib(10))
+
+			console.log('动态规划', dynFib(10))
+
+			console.log('动态规划非数组', iterFib(10))
+
+			let orginRmb = 63
+			let coins = []
+			makeChange(orginRmb, coins)
+			if (coins[3] > 0) {
+				console.log('继续使用10块')
+			}
+			if (coins[2] > 0) {
+				console.log('继续使用5块')
+			}
+			if (coins[1] > 0) {
+				console.log('继续使用1块')
+			}
+			if (coins[0] === 0) {
+				console.log('完了')
+			}
+		</script>
+	</body>
+</html>

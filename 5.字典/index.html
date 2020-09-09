@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>字典</title>
+	</head>
+	<body>
+		<script src="./dictionary.js"></script>
+
+		<script>
+			// test
+
+			let shoes = new Dictionary()
+			shoes.add('帆布', 450)
+			shoes.add('椰子', 1850)
+			shoes.add('AJ', 1050)
+			shoes.add('老爹鞋', 350)
+			shoes.add('拖鞋', 150)
+
+			console.log(`AJ价格：${shoes.find('AJ')}`)
+			console.log(`count`, shoes.count())
+			shoes.showAll()
+
+			console.log('===========')
+			shoes.remove('拖鞋')
+			console.log(`count`, shoes.count())
+			shoes.showAll()
+
+			console.log('===========')
+			shoes.clear()
+			console.log(`count`, shoes.count())
+			shoes.showAll()
+		</script>
+	</body>
+</html>
