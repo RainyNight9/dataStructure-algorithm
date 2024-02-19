@@ -14,6 +14,91 @@
 
 循环队列：可以通过取模操作更充分地利用空间。
 
+## 优先队列
+
+```js
+class PriorityQueue {
+  constructor() {
+    this.elements = [];
+  }
+
+  // 插入元素到队列中，根据元素的优先级进行排序
+  enqueue(element, priority) {
+    const item = { element, priority };
+    let added = false;
+    for (let i = 0; i < this.elements.length; i++) {
+      if (item.priority < this.elements[i].priority) {
+        this.elements.splice(i, 0, item);
+        added = true;
+        break;
+      }
+    }
+    if (!added) {
+      this.elements.push(item);
+    }
+  }
+
+  // 移除并返回队列中优先级最高的元素
+  dequeue() {
+    return this.elements.shift();
+  }
+
+  // 返回队列中优先级最高的元素，但不移除它
+  peek() {
+    return this.elements[0];
+  }
+
+  // 检查队列是否为空
+  isEmpty() {
+    return this.elements.length === 0;
+  }
+
+  // 返回队列的大小（元素数量）
+  size() {
+    return this.elements.length;
+  }
+}
+
+// 示例用法
+const pq = new PriorityQueue();
+pq.enqueue("A", 2);
+pq.enqueue("B", 1);
+pq.enqueue("C", 3);
+
+console.log(pq.peek()); // 输出: { element: 'B', priority: 1 }
+
+pq.dequeue();
+console.log(pq.peek()); // 输出: { element: 'A', priority: 2 }
+```
+
+## 循环队列——击鼓传花
+
+```js
+function hotPotato(names, num) {
+  const queue = new Queue();
+
+  for (let i = 0; i < names.length; i++) {
+    queue.enqueue(names[i]);
+  }
+
+  let eliminated = '';
+  while (queue.size() > 1) {
+    for (let i = 0; i < num; i++) {
+      queue.enqueue(queue.dequeue()); // 把第一个人移到队列末尾
+    }
+    eliminated = queue.dequeue(); // 淘汰第 num 个人
+    console.log(`${eliminated} 被淘汰！`);
+  }
+
+  return queue.front(); // 返回最后留下的人
+}
+
+// 示例用法
+const names = ['Alice', 'Bob', 'Charlie', 'David', 'Emma'];
+const winner = hotPotato(names, 3);
+console.log(`胜利者是：${winner}`);
+```
+
 ## 应用场景
 
     1、CPU 的超线程技术

@@ -21,19 +21,22 @@ function Stack() {
 
 // 向栈中压入元素 同时让指针top+1 一定注意++
 function push(element) {
-  this.dataStore[this.top++] = element
+  // this.dataStore[this.top++] = element
+  this.dataStore.push(element)
 }
 
 // 出栈操作 同时将top-1
 function pop() {
-  let newData = this.dataStore[--this.top]
-  this.dataStore.splice(-1, 1)
-  return newData
+  // let newData = this.dataStore[--this.top]
+  // this.dataStore.splice(-1, 1)
+  // return newData
+  return this.dataStore.pop()
 }
 
 // 返回栈顶元素，变量top值减1 返回不删除
 function peek() {
-  return this.dataStore[this.top - 1]
+  // return this.dataStore[this.top - 1]
+  return this.dataStore[this.dataStore.length-1]
 }
 
 // 返回栈内元素的元素个数
@@ -48,7 +51,8 @@ function clear() {
 }
 
 function isEmpty() {
-  return this.top === 0
+  // return this.top === 0
+  return this.dataStore.length === 0
 }
 
 function print() {
@@ -85,7 +89,7 @@ function print() {
 
 
 
-// 用ES6 的WeakMap 实现类, 可以确保属性 是私有的
+// 用ES6 的 WeakMap 实现类, 可以确保属性 是私有的
 // `WeakMap`结构与`Map`结构类似，也是用于生成键值对的集合，其中键是对象，值可以是任意数据类型
 // const dataStore = new WeakMap() // 是在 类 以外声明的，谁都可以改动，加个闭包
 
@@ -103,6 +107,7 @@ function print() {
 
 // 加个闭包
 // let Stack = (function () {
+//   const dataStore = new WeakMap()
 //   class Stack {
 //     constructor() {
 //       dataStore.set(this, []) // 以this（Stack类自己的引用）为键，把代表栈的数组存入

@@ -16,11 +16,31 @@ function Node(ele) {
 // 创建单链表的构造函数
 function LinkedList() {
   this.head = new Node('head')
+  this.length = 0
   this.find = find
   this.insert = insert
   this.display = display
   this.findPrevious = findPrevious
   this.remove = remove
+}
+
+// 尾部添加一个新的
+function append(element) {
+  let node = new Node(element)
+  let cur
+
+  if(this.head === null) {
+    this.head = node
+  } else {
+    cur = this.head
+    while(cur.next){
+      cur = cur.next
+    }
+
+    cur.next = node
+  }
+
+  this.length++
 }
 
 function find(item) {
@@ -31,6 +51,7 @@ function find(item) {
   return currNode
 }
 
+// 特定位置插入一个新的
 function insert(newEle, item) {
   let newNode = new Node(newEle)
   let currNode = this.find(item)
@@ -54,6 +75,7 @@ function findPrevious(item) {
   return currNode
 }
 
+// 移除一项
 function remove(item) {
   let preNode = this.findPrevious(item)
   let currNode = this.find(item)

@@ -10,35 +10,41 @@ function Queue() {
   this.dequeue = dequeue // 删除队首元素
   this.front = front // 读取队首元素
   this.back = back // 读取队尾元素
-  this.toString = toString // 显示队列中的所有元素
+  this.size = size
+  this.print = print // 显示队列中的所有元素
   this.empty = empty // 判断队列是否为空
 }
 
+// 添加
 function enqueue(element) {
   this.dataStore.push(element)
 }
 
+// 移除
 function dequeue() {
   this.dataStore.shift()
 }
 
+// 返回第一个
 function front() {
   return this.dataStore[0]
 }
 
+// 返回最后一个
 function back() {
   return this.dataStore[this.dataStore.length - 1]
 }
 
-function toString() {
-  let str = ''
-  for (let i = 0; i < this.dataStore.length; i++) {
-    str += this.dataStore[i]
-  }
-  return str
+function size() {
+  return this.dataStore.length
 }
 
-function empty() {
-  if (this.dataStore.length === 0) return true
-  return false
+function print() {
+  console.log(this.dataStore.toString())
 }
+
+// 是否空队列
+function empty() {
+  return this.dataStore.length === 0
+}
+
