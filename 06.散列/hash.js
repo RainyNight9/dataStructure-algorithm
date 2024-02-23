@@ -29,6 +29,7 @@ function build() {
   }
 }
 
+// 散列函数
 function simple(data) {
   let total = 0
   for (let i = 0; i < data.length; i++) {
