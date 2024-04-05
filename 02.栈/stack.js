@@ -1,11 +1,3 @@
-// 栈的介绍
-// 1.栈是一种特殊的列表 栈顶 栈底
-// 2.栈是一种高效的数据结构，因为数据只能在栈顶删除或增加，操作很快
-// 3.栈内元素只能通过列表的一端访问，这一端称为栈顶（反之栈底）
-// 4.栈被称为一种后入先出的数据结构（LIFO，last-in-first-out）
-// 5.插入新元素称作进栈、入栈、压栈，从一个栈删除元素称作出栈或者退栈
-// 6.例子：类似一摞书或者 一摞盘子
-
 // 创建一个 栈 的构造函数
 function Stack() {
   this.dataStore = [] // 保存栈内元素
@@ -77,8 +69,8 @@ function print() {
 
 
 
-// 用ES6 的限定作用域Symbol 实现类
-// let _dataStore = Symbol() // 声明Symbol 类型的变量
+// 用ES6 的限定作用域 Symbol 实现类
+// let _dataStore = Symbol() // 声明 Symbol 类型的变量
 
 // class Stack {
 //   constructor() {
@@ -90,8 +82,9 @@ function print() {
 
 
 
-// 用ES6 的 WeakMap 实现类, 可以确保属性 是私有的
+// 用 ES6 的 WeakMap 实现类, 可以确保属性 是私有的
 // `WeakMap`结构与`Map`结构类似，也是用于生成键值对的集合，其中键是对象，值可以是任意数据类型
+
 // const dataStore = new WeakMap() // 是在 类 以外声明的，谁都可以改动，加个闭包
 
 // class Stack {
@@ -121,50 +114,3 @@ function print() {
 //   }
 //   return Stack
 // })()
-
-
-// 学习使用栈的最著名的三个算法示例：10进制转2进制，任意进制转换，平衡圆括号
-// 233 == 11101001
-// 2x(10x10) + 3x(10) + 3x(1)
-// function divideBy2(decNumber){
-//   var remStack = new Stack(),
-//       rem,
-//       binaryString = '';
-//   while (decNumber > 0){
-//       rem = Math.floor(decNumber % 2);
-//       remStack.push(rem);
-//       decNumber = Math.floor(decNumber / 2);
-//   }
-//   while (!remStack.isEmpty()){
-//       binaryString += remStack.pop().toString();
-//   }
-//   return binaryString;
-// }
-
-// console.log(divideBy2(233));
-// console.log(divideBy2(10));
-// console.log(divideBy2(1000));
-
-
-
-// 10进制转其他任意进制
-// function baseConverter(decNumber, base){
-//   var remStack = new Stack(),
-//       rem,
-//       baseString = '',
-//       digits = '0123456789ABCDEF';
-//   while (decNumber > 0){
-//       rem = Math.floor(decNumber % base);
-//       remStack.push(rem);
-//       decNumber = Math.floor(decNumber / base);
-//   }
-//   while (!remStack.isEmpty()){
-//       baseString += digits[remStack.pop()];
-//   }
-//   return baseString;
-// }
-
-// console.log(baseConverter(100345, 2));
-// console.log(baseConverter(100345, 8));
-// console.log(baseConverter(100345, 16));
-
