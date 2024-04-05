@@ -4,7 +4,7 @@
 // 3.元素的数量受内存控制（即：元素不是很多）
 // 4.不包含任何元素的列表称为空列表
 
-// 创建List构造函数
+// 创建 List 构造函数
 function List() {
   this.listSize = 0 // 列表元素个数
   this.pos = 0 // 列表当前位置
@@ -17,10 +17,10 @@ function List() {
   this.remove = remove // 从列表中删除元素
   this.front = front // 从列表的当前位置移动到第一元素
   this.end = end // 从列表的当前位置移动到最后一个位置
-  this.prev = prev // 将当前位置后移一个位置
-  this.next = next // 将当前位置前移一个位置
+  this.prev = prev // 将当前位置前移一个位置
+  this.next = next // 将当前位置后移一个位置
   this.length = length // 列表包含元素的个数
-  this.currPos = currPos // 返回列表当前位置
+  this.currPos = currPos // 返回列表当前位置方法
   this.moveTo = moveTo // 将当前位置移动到指定位置
   this.getElement = getElement // 显示当前的元素
   this.contains = contains // 是否包含该元素

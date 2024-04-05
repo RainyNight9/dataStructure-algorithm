@@ -41,7 +41,8 @@ function peek() {
 
 // 返回栈内元素的元素个数
 function length() {
-  return this.top
+  // return this.top
+  return this.dataStore.length
 }
 
 // 清空一个栈
