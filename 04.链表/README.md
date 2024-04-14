@@ -1,12 +1,19 @@
-# 链表
+---
+theme: channing-cyan
+---
+# 数据结构与算法——链表
 
 ## 基础知识
 
-链表是一种由一群结点组成顺序的数据结构。
+1. 数组不是组织数据最佳结构
+2. JS 的数组被实现成了对象，与其他语言的数组相比，效率低了很多
+3. 如果你发现数组实际使用时很慢，就可以考虑链表代替它。除了对数据的随机访问，链表几乎可以用在任何可以使用一维数组的地方
 
-在最简单的情况下，每个结点由一个数据和一个指向在顺序中下一个结点的指针（即连接）而组成。
+链表是一种由`一群节点组成顺序`的数据结构。
 
-1. 链表中的每个节点至少包含两部分：数据域 和 指针域
+在最简单的情况下，每个节点由`一个数据`和一个指向在顺序中下一个节点的`指针`（即连接）而组成。
+
+1. 链表中的每个节点至少包含两部分：`数据域 和 指针域`
 2. 链表中的每个节点，通过指针域的值，形成线性结构
 3. 查找节点O(n），插入节点O(1)，删除节点O(1)
 4. 不适合快速的定位数据，适合动态的插入和删除数据的应用场景
@@ -15,10 +22,94 @@
 
 1. 传统方法(节点+指针) 
 2. 使用数组模拟
-    指针域和数据域分离
-    利用数组存放下标进行索引
+    - 指针域和数据域分离
+    - 利用数组存放下标进行索引
 
-## 双向链表
+链表`不适合快速的定位数据`，`适合动态的插入和删除的应用场景`。
+
+## 实现链表
+
+```js
+function Node(ele) {
+  this.ele = ele
+  this.next = null
+}
+
+// 创建单链表的构造函数
+function LinkedList() {
+  this.head = new Node('head')
+  this.length = 0
+  this.find = find
+  this.insert = insert
+  this.display = display
+  this.findPrevious = findPrevious
+  this.remove = remove
+}
+
+// 尾部添加一个新的
+function append(element) {
+  let node = new Node(element)
+  let cur
+
+  if(this.head === null) {
+    this.head = node
+  } else {
+    cur = this.head
+    while(cur.next){
+      cur = cur.next
+    }
+
+    cur.next = node
+  }
+
+  this.length++
+}
+
+function find(item) {
+  let currNode = this.head
+  while (currNode.ele != item) {
+    currNode = currNode.next
+  }
+  return currNode
+}
+
+// 特定位置插入一个新的
+function insert(newEle, item) {
+  let newNode = new Node(newEle)
+  let currNode = this.find(item)
+  newNode.next = currNode.next
+  currNode.next = newNode
+}
+
+// 显示链表中的元素
+function display() {
+  let currNode = this.head
+  while (currNode.next != null) {
+    console.log(currNode.next.ele)
+    currNode = currNode.next
+  }
+}
+
+function findPrevious(item) {
+  let currNode = this.head
+  while (currNode.next != null && currNode.next.ele != item) {
+    currNode = currNode.next
+  }
+  return currNode
+}
+
+// 移除一项
+function remove(item) {
+  let preNode = this.findPrevious(item)
+  let currNode = this.find(item)
+  if (preNode.next != null) {
+    preNode.next = currNode.next
+    currNode.next = null
+  }
+}
+```
+
+### 双向链表
 
 双向链表（Doubly Linked List）与普通的链表相似，不同之处在于每个节点都有指向前一个节点和后一个节点的指针。这使得双向链表可以从前向后或从后向前遍历，而不需要像单向链表那样重新遍历整个列表。
 
@@ -27,65 +118,82 @@
 双向链表的优点是在某些情况下能够提供更高效的插入和删除操作，因为它不需要像单向链表那样寻找前一个节点。但是，它相对于单向链表需要更多的存储空间来存储额外的指针。
 
 ```js
-class Node {
-    constructor(data) {
-        this.data = data;
-        this.prev = null;
-        this.next = null;
-    }
+// 创建双链表
+function Node2(ele) {
+  this.ele = ele
+  this.next = null
+  this.previous = null
 }
 
-class DoublyLinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = null;
-    }
-
-    append(data) {
-        const newNode = new Node(data);
-        if (!this.head) {
-            this.head = newNode;
-            this.tail = newNode;
-        } else {
-            newNode.prev = this.tail;
-            this.tail.next = newNode;
-            this.tail = newNode;
-        }
-    }
-
-    traverseForward() {
-        let current = this.head;
-        while (current) {
-            console.log(current.data);
-            current = current.next;
-        }
-    }
-
-    traverseBackward() {
-        let current = this.tail;
-        while (current) {
-            console.log(current.data);
-            current = current.prev;
-        }
-    }
+function DLList() {
+  this.head = new Node2('head')
+  this.find = find
+  this.insert = insert
+  this.remove = remove
+  this.display = display
+  this.findLast = findLast
+  this.disReverse = disReverse
 }
 
-// Example usage:
-const dll = new DoublyLinkedList();
-dll.append(1);
-dll.append(2);
-dll.append(3);
-dll.append(4);
+function find(item) {
+  let currNode = this.head
+  while (currNode.ele != item) {
+    currNode = currNode.next
+  }
+  return currNode
+}
 
-console.log("Forward traversal:");
-dll.traverseForward();
+function insert(newEle, item) {
+  let newNode = new Node2(newEle)
+  let currNode = this.find(item)
+  newNode.next = currNode.next
+  newNode.previous = currNode
+  currNode.next = newNode
+  if (currNode.next == null) {
+    newNode.next.previous = newNode
+  }
+}
 
-console.log("Backward traversal:");
-dll.traverseBackward();
+function remove(item) {
+  let currNode = this.find(item)
+  if (currNode.next != null) {
+    currNode.previous.next = currNode.next
+    currNode.next.previous = currNode.previous
+    currNode.previous = null
+    currNode.next = null
+  } else {
+    currNode.previous.next = null
+    currNode.previous = null
+  }
+}
 
+function dispaly() {
+  let currNode = this.head
+  while (currNode.next != null) {
+    console.log(currNode.next.ele)
+    currNode = currNode.next
+  }
+}
+
+function findLast() {
+  let currNode = this.head
+  while (currNode.next != null) {
+    currNode = currNode.next
+  }
+  return currNode
+}
+
+// 反序显示双向链表中的元素
+function disReverse() {
+  let currNode = this.findLast()
+  while (currNode.previous != null) {
+    console.log(currNode.ele)
+    currNode = currNode.previous
+  }
+}
 ```
 
-## 循环链表
+### 循环链表
 
 循环链表是一种特殊的链表，其中最后一个节点的指针不是指向空（null），而是指向链表的头部，从而形成一个环。这意味着可以从任何节点开始遍历整个链表，直到再次回到起始节点。
 
@@ -144,8 +252,8 @@ cll.traverse();
 
 1. 操作系统内的动态内存分配
 2. LRU 缓存淘汰算法
-    LRU = Least Recently Used(近期最少使用)
-    vue 的 keep-alive 的实现就是 LRU 缓存淘汰算法
+    - LRU = Least Recently Used(近期最少使用)
+    - vue 的 keep-alive 的实现就是 LRU 缓存淘汰算法
 
 缓存是一种高速的数据结构。缓存其实就是低速设备有效的数据管理手段，缓存是⾼速设备之于低速设备的⼀种称呼。
 
@@ -153,13 +261,13 @@ cll.traverse();
 
 ## 经典算法
 
-1、[141. 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
+### 1、[141. 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
 
-**思路一：哈希表**
+思路一：哈希表
 
 - 使用哈希表(额外的存储区)存储已经遍历过的节点
 
-**思路二：快慢指针**
+思路二：快慢指针
 
 - 使用快慢指针，快指针一次向前2个节点 慢指针一次向前1个节点
     - 有环的链表中，快指针和慢指针最终一定会在环中相遇
@@ -177,11 +285,11 @@ function hasCycle(head: ListNode | null): boolean {
 };
 ```
 
-2、[142. 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/)
+### 2、[142. 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/)
 
-**思路一：哈希表**
+思路一：哈希表
 
-**思路二：快慢指针**
+思路二：快慢指针
 
 - 快指针走的路程是慢指针的2倍
 - 考虑快慢指针第一次相遇的情况(设此时慢指针走的路程为x)
@@ -235,15 +343,14 @@ function detectCycle(head: ListNode | null): ListNode | null {
 };
 ```
 
-3、[202. 快乐数](https://leetcode.cn/problems/happy-number/)
+### 3、[202. 快乐数](https://leetcode.cn/problems/happy-number/)
 
-**思路一：快慢指针**
+思路一：快慢指针
 
 - 转化为判断链表是否有环的问题
-
-1. 创建一个慢指针，一次走一步，再创建一个快指针，一次走两步。
-2. 当快慢指针相遇，代表形参环路，该数不是快乐数。
-3. 若指针移动过程中，找到了 11，则当前数是一个快乐数。
+    1. 创建一个慢指针，一次走一步，再创建一个快指针，一次走两步。
+    2. 当快慢指针相遇，代表形参环路，该数不是快乐数。
+    3. 若指针移动过程中，找到了 11，则当前数是一个快乐数。
 
 ```ts
 function isHappy(n: number): boolean {
@@ -260,9 +367,9 @@ function getNext(x: number): number {
 }
 ```
 
-4、[206. 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
+### 4、[206. 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
 
-**思路一：迭代反转**
+思路一：迭代反转
 
 - 可以使用虚拟头节点来进行头插法
 
@@ -279,7 +386,7 @@ function reverseList(head: ListNode | null): ListNode | null {
 };
 ```
 
-**思路二：递归**
+思路二：递归
 
 - 一次拆掉一个节点并递归处理剩余的子链表
 
@@ -293,9 +400,9 @@ function reverseList(head: ListNode | null): ListNode | null {
 };
 ```
 
-5、[92. 反转链表 II](https://leetcode.cn/problems/reverse-linked-list-ii/)
+### 5、[92. 反转链表 II](https://leetcode.cn/problems/reverse-linked-list-ii/)
 
-**思路一：递归**
+思路一：递归
 
 - 使用虚拟头结点(dummy head)
     - 通常用于链表的首地址有可能改变的情况
@@ -322,11 +429,11 @@ function reverseN(head: ListNode, n: number): ListNode{
 }
 ```
 
-6、**[25. K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)**
+### 6、**[25. K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)**
 
-**思路一：递归（困难）**
+思路一：递归（困难）
 
-- 先判断是否有K个元素，然后对这K个节点进行反转，最后拆装一下首尾部分
+- 先判断是否有 K 个元素，然后对这 K 个节点进行反转，最后拆装一下首尾部分
 
 ```ts
 function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
@@ -357,9 +464,9 @@ function _reverseN(head: ListNode | null, n: number): ListNode | null {
 }
 ```
 
-7、[61. 旋转链表](https://leetcode.cn/problems/rotate-list/)
+### 7、[61. 旋转链表](https://leetcode.cn/problems/rotate-list/)
 
-**思路一：迭代**
+思路一：迭代
 
 - 把整个链表首尾相接，向后走K位后将环拆开
 
@@ -378,7 +485,7 @@ function rotateRight(head: ListNode | null, k: number): ListNode | null {
 };
 ```
 
-8、[24. 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
+### 8、[24. 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
 
 ```ts
 // 类似第 6 题解法，是K = 2的简单情形
@@ -421,9 +528,9 @@ function swapPairs(head: ListNode | null): ListNode | null {
 };
 ```
 
-9、[19. 删除链表的倒数第 N 个结点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)
+### 9、[19. 删除链表的倒数第 N 个结点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)
 
-**思路一：快慢指针**
+思路一：快慢指针
 
 - 找到前一个节点，删除后调整指针
 
@@ -437,7 +544,7 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
 };
 ```
 
-10、[83. 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
+### 10、[83. 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
 
 ```ts
 function deleteDuplicates(head: ListNode | null): ListNode | null {
@@ -454,9 +561,9 @@ function deleteDuplicates(head: ListNode | null): ListNode | null {
 };
 ```
 
-11、[82. 删除排序链表中的重复元素 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
+### 11、[82. 删除排序链表中的重复元素 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/)
 
-**思路一：快慢指针**
+思路一：快慢指针
 
 ```ts
 function deleteDuplicates(head: ListNode | null): ListNode | null {
@@ -474,7 +581,7 @@ function deleteDuplicates(head: ListNode | null): ListNode | null {
 };
 ```
 
-12、[10万以内快乐数的总和]
+### 12、10万以内快乐数的总和
 
 ```ts
 function happyTotal(num: number): number {
@@ -501,3 +608,4 @@ function getNext(x: number): number {
 }
 ```
 
+未完结，敬请期待！

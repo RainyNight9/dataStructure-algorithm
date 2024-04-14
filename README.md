@@ -7,7 +7,7 @@
 1. 数组(列表) https://juejin.cn/post/7353877562303594533
 2. 栈 https://juejin.cn/post/7353548145585209383
 3. 队列 https://github.com/RainyNight9/dataStructure-algorithm/tree/master/03.%E9%98%9F%E5%88%97
-4. 链表
+4. 链表 https://juejin.cn/post/7105961242200080420
 5. 集合
 6. 字典和散列表
 7. 树
